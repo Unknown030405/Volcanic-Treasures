@@ -73,6 +73,13 @@ public static class Fields
           public const float LadderCheckRadius = 0.3f;
           public const float SlopeCheckRadius = 0.4f;
      }
+     
+     public static class CameraMovement
+     {
+          public const float SmoothTime = 0.25f;
+          public const float ZOffset = -10f;
+          public const float YOffset = 3f;
+     }
 
      public static class CameraMovement
      {
