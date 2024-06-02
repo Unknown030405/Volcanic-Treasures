@@ -1,4 +1,3 @@
-using Player_Scripts;
 using UnityEngine;
 
 namespace Buffs
@@ -6,21 +5,16 @@ namespace Buffs
     // Скрипт описывает логику эффекта (объекта) "Dirt"
     public class Dirt : Buffs
     {
-        [SerializeField] private GameObject player;
-        
-        private Movement _movement;
-
         protected override void AddBuff()
         {
-            _movement = player.GetComponent<Movement>();
-            _movement.SetSpeed(Fields.Buffs.DirtSlowdown);
-            _movement.SetJumpForce(Fields.Buffs.DirtSlowdown);
+            Movement.SetSpeed(Fields.Buffs.DirtSlowdown);
+            Movement.SetJumpForce(Fields.Buffs.DirtSlowdown);
         }
 
         protected override void RemoveBuff()
         {
-            _movement.ResetSpeed(Fields.Buffs.DirtSlowdown);
-            _movement.ResetJumpForce(Fields.Buffs.DirtSlowdown);
+            Movement.ResetSpeed(Fields.Buffs.DirtSlowdown);
+            Movement.ResetJumpForce(Fields.Buffs.DirtSlowdown);
         }
     
         private void OnTriggerEnter2D(Collider2D other)

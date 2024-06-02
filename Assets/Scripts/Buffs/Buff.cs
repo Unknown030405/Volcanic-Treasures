@@ -6,14 +6,6 @@ namespace Buffs
 {
     public abstract class Buffs : MonoBehaviour
     {
-        protected abstract void AddBuff();
-
-        protected abstract void RemoveBuff();
-    }
-    
-    // Данный класс отвечает за все эффекты игрока, которые можно подобрать из сундука
-    public abstract class LootBuffs : Buffs, ILootable
-    {
         protected Player Player;
         protected Movement Movement;
         protected Canvas Canvas;
@@ -26,6 +18,14 @@ namespace Buffs
             Movement = player.GetComponent<Movement>();
         }
         
+        protected abstract void AddBuff();
+
+        protected abstract void RemoveBuff();
+    }
+    
+    // Данный класс отвечает за все эффекты игрока, которые можно подобрать из сундука
+    public abstract class LootBuffs : Buffs, ILootable
+    {
         protected abstract Transform GetImage();
 
         public void GivePlayer()
