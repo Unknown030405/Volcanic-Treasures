@@ -1,3 +1,5 @@
+using System.Numerics;
+
 public static class Fields
 {
      public static class Tags
@@ -64,6 +66,13 @@ public static class Fields
           public const float GroundCheckRadius = 0.4f;
           public const float LadderCheckRadius = 0.3f;
           public const float SlopeCheckRadius = 0.4f;
+     }
+
+     public static class CameraMovement
+     {
+          public const float smoothTime = 0.25f;
+          public const float zOffset = -10f;
+          public const float yOffset = 3f;
      }
 
      public const int DiamondsAmount = 1;
