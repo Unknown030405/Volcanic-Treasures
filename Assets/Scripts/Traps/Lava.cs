@@ -7,7 +7,7 @@ namespace Traps
     {
         public void OnTriggerStay2D(Collider2D other)
         {
-            if (other.CompareTag(Fields.Tags.Player) && !other.GetComponent<Player>().HasRingLava)
+            if (other.CompareTag(Fields.Tags.PlayerTag) && !other.GetComponent<Player>().HasRingLava)
                 other.GetComponent<Player>().Death();
         }
     }

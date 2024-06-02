@@ -12,7 +12,7 @@ public class Key : MonoBehaviour
     private void Awake()
     {
         Rigidbody = GetComponent<Rigidbody2D>();
-        _player = GameObject.FindWithTag(Fields.Tags.Player).GetComponent<Player>();
+        _player = GameObject.FindWithTag(Fields.Tags.PlayerTag).GetComponent<Player>();
     }
 
     private void FixedUpdate()
@@ -29,7 +29,7 @@ public class Key : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D other)
     {
         // Если контактирующий объект игрок
-        if (other.CompareTag(Fields.Tags.Player) && !_player.Key)
+        if (other.CompareTag(Fields.Tags.PlayerTag) && !_player.Key)
         {
             _player.Key = this;
             _active = true;

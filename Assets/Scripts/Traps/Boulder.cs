@@ -10,7 +10,7 @@ namespace Traps
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag(Fields.Tags.Player))
+            if (other.CompareTag(Fields.Tags.PlayerTag))
             {
                 rb.gravityScale = gravityForce;
                 Destroy(gameObject, time);

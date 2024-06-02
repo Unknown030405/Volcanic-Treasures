@@ -2768,6 +2768,14 @@ PrefabInstance:
       value: Gold_Key
       objectReference: {fileID: 0}
     - target: {fileID: 7937129547249740131, guid: b376410a635841341bda343c3abf6d6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937129547249740131, guid: b376410a635841341bda343c3abf6d6d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937129547249740131, guid: b376410a635841341bda343c3abf6d6d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.5
       objectReference: {fileID: 0}

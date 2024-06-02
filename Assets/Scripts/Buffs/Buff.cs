@@ -20,7 +20,7 @@ namespace Buffs
         
         private void Awake()
         {
-            var player = GameObject.FindWithTag(Fields.Tags.Player);
+            var player = GameObject.FindWithTag(Fields.Tags.PlayerTag);
             Canvas = GameObject.FindWithTag(Fields.Tags.Canvas).GetComponent<Canvas>();
             Player = player.GetComponent<Player>();
             Movement = player.GetComponent<Movement>();

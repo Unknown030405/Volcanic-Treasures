@@ -4,11 +4,17 @@ public static class Fields
 {
      public static class Tags
      {
-          public const string Player = "Player";
+          public const string PlayerTag = "Player";
           public const string Canvas = "Canvas";
           public const string ChestKey = "ChestKey";
           public const string Chest = "Chest";
           public const string DoorKey = "DoorKey";
+     }
+
+     public static class Scenes
+     {
+          public const string Block1 = "Block1";
+          public const string Menu = "Menu";
      }
 
      public static class AnimationState
@@ -26,8 +32,8 @@ public static class Fields
      public static class Generation
      {
           public const float BlockSize = 20;
-          public const float BlockBaseSpeed = 1;
-          public const float BlockSpeedIncrease = 0.1f;
+          public const float BlockBaseSpeed = 0.01f;
+          public const float BlockSpeedIncrease = 0.01f;
           public const float LavaPosition = -20;
           public const float LavaOffset = 9;
      }

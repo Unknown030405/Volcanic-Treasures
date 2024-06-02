@@ -25,13 +25,13 @@ namespace Buffs
     
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag(Fields.Tags.Player))
+            if (other.CompareTag(Fields.Tags.PlayerTag))
                 AddBuff();
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (other.CompareTag(Fields.Tags.Player))
+            if (other.CompareTag(Fields.Tags.PlayerTag))
                 RemoveBuff();
         }
     }

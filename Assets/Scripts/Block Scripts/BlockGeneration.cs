@@ -24,7 +24,7 @@ namespace Block_Scripts
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.CompareTag(Fields.Tags.Player) && !_hasSpawned)
+            if (other.gameObject.CompareTag(Fields.Tags.PlayerTag) && !_hasSpawned)
             {
                 _hasSpawned = true;
                 

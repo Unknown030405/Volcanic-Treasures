@@ -39,8 +39,13 @@ namespace Player_Scripts
                 rb.velocity = new Vector2(0, Fields.Player.ClimbSpeed);
 
             // Прыжок (Разовое нажатие Spacebar)
-            if (Input.GetButton("Jump") && (IsGrounded() || IsOnSlope()))
-                rb.velocity = new Vector2(0, jumpForce);
+            if (Input.GetButton("Jump"))
+            {
+                if (IsGrounded())
+                    rb.velocity = new Vector2(0, jumpForce);
+                if (IsOnSlope())
+                    rb.velocity = new Vector2(0, jumpForce + 2);
+            }
             
             // Огроничитель скорости на лестнице и наклонной поверхности
             /*if ((IsOnLadder() || IsOnSlope()) && rb.velocity.magnitude > speed)
