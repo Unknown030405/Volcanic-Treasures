@@ -85,13 +85,6 @@ public static class Fields
           public const float YOffset = 3f;
      }
 
-     public static class CameraMovement
-     {
-          public const float smoothTime = 0.25f;
-          public const float zOffset = -10f;
-          public const float yOffset = 3f;
-     }
-
      public const int DiamondsAmount = 1;
      public const float DoorOpenTime = 0.8f;
 }
