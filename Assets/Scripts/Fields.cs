@@ -32,7 +32,7 @@ public static class Fields
      public static class Generation
      {
           public const float BlockSize = 20;
-          public const float BlockBaseSpeed = 0.01f;
+          public const float BlockBaseSpeed = 0.02f;
           public const float BlockSpeedIncrease = 0.01f;
           public const float LavaPosition = -20;
           public const float LavaOffset = 9;

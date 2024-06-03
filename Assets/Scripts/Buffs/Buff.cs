@@ -42,7 +42,6 @@ namespace Buffs
                 Player.Effects.Add(image, Fields.Buffs.UsingTime);
                 // Player.CreateBuffEvent(this, new UIEventArgs(image));
             }
-
             Debug.Log("Item Given");
 
             Invoke(nameof(RemoveBuff), Fields.Buffs.UsingTime);

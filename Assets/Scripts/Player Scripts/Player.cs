@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UI;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -16,7 +15,8 @@ namespace Player_Scripts
         
         public int Coins { get; private set; }
         public int Diamonds { get; private set; }
-        public float Distance { get; set; }
+        private float PlayerDistance { get; set; }
+        private float MaxPlayerDistance { get; set; }
         public bool HasHelmet { get; set; }
         public bool HasRingLava { get; set; }
         public Key Key { get; set; }
@@ -34,13 +34,16 @@ namespace Player_Scripts
 
         private void Update()
         {
-            UpdateDistance();
+            var blockSpeed = 
+                Fields.Generation.BlockBaseSpeed + Time.timeSinceLevelLoad * Fields.Generation.BlockSpeedIncrease;
+            PlayerDistance += blockSpeed * Time.deltaTime;
+            MaxPlayerDistance = Math.Max(PlayerDistance + transform.position.y, MaxPlayerDistance);
             // Debug.Log(Distance);
         }
 
-        public void UpdateDistance()
+        public int GetPlayerDistance()
         {
-            Distance += Fields.Generation.BlockBaseSpeed;
+            return (int)MaxPlayerDistance;
         }
 
         // public void CreateBuffEvent(object obj, UIEventArgs args)
@@ -50,10 +53,11 @@ namespace Player_Scripts
         
         public void Death()
         {
-            DeathEvent?.Invoke(this, EventArgs.Empty);
             PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + Coins);
             PlayerPrefs.SetInt("Diamonds", PlayerPrefs.GetInt("Diamonds") + Diamonds);
-            PlayerPrefs.SetInt("Distance", (int)Distance);
+            PlayerPrefs.SetInt("Distance", (int)MaxPlayerDistance);
+            PlayerPrefs.SetInt("MaxDistance", Math.Max((int)MaxPlayerDistance, PlayerPrefs.GetInt("MaxDistance")));
+            DeathEvent?.Invoke(this, EventArgs.Empty);
         }
     }
 }

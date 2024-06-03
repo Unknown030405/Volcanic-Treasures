@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,8 +33,7 @@ namespace UI
         {
             coinsText.text = _player.Coins.ToString();
             diamondsText.text = _player.Diamonds.ToString();
-            var intDistance = (int)_player.Distance;
-            distanceText.text = intDistance.ToString();
+            distanceText.text = _player.GetPlayerDistance().ToString();
             CheckDelay();
             // _player.BuffEvent += StartCooldown;
         }
@@ -67,13 +65,15 @@ namespace UI
         // private IEnumerator BuffCooldown(Transform key)
         // {
         //     AddBuffToCanvas(key);
+        //
+        //     var image = key.GetChild(1).GetComponent<Image>();
         //     
         //     if (_buffs.ContainsKey(key))
         //     {
         //         while (_buffs[key] > 0)
         //         {
         //             var imageState = _buffs[key] / Fields.Buffs.UsingTime;
-        //             key.GetChild(1).GetComponent<Image>().fillAmount = imageState;
+        //             image.fillAmount = imageState;
         //             _buffs[key] -= Time.deltaTime;
         //             yield return new WaitForEndOfFrame();
         //         }
@@ -85,7 +85,7 @@ namespace UI
         //
         //     yield return null;
         // }
-        //
+        
         // private void StartCoroutine(Action methodName)
         // {
         //     throw new NotImplementedException();

@@ -1,4 +1,6 @@
+using System;
 using Player_Scripts;
+using Unity.VisualScripting;
 using UnityEngine;
 
 // Данный скрипт весит на "Ключах" и позволяет открывать сундуки и двери с помощью них
@@ -13,6 +15,18 @@ public class Key : MonoBehaviour
     {
         Rigidbody = GetComponent<Rigidbody2D>();
         _player = GameObject.FindWithTag(Fields.Tags.PlayerTag).GetComponent<Player>();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.Q) && _active)
+        {
+            var direction = transform.position - _player.transform.position;
+            _active = false;
+            _player.Key = null;
+            // Rigidbody.AddForce(new Vector2(direction.x, direction.y).normalized);
+            Rigidbody.velocity = Vector2.zero;
+        }
     }
 
     private void FixedUpdate()
