@@ -9,6 +9,7 @@ public class Chest : MonoBehaviour
 {
     private Animator _animator;
     private List<ILootable> _loot;
+    private AudioSource _audioSource;
 
     private void Awake()
     {
@@ -23,6 +24,7 @@ public class Chest : MonoBehaviour
         };
         
         _animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
     }
     
     private void OnTriggerEnter2D(Collider2D other)
@@ -37,6 +39,7 @@ public class Chest : MonoBehaviour
                 _animator.Play(Fields.AnimationState.Chest);
                 key.Rigidbody.velocity = new Vector2(0, 0);
                 Destroy(key.gameObject);
+                _audioSource.Play();
                 DropItem();
             }
         }

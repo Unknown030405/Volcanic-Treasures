@@ -85,6 +85,12 @@ public static class Fields
           public const float ZOffset = -10f;
           public const float YOffset = 3f;
      }
+     
+     public static class Score
+     {
+          public const int CoinMultiplier = 2;
+          public const int DiamondMultiplier = 40;
+     }
 
      public static class Scoreboard
      {

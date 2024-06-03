@@ -6,13 +6,21 @@ namespace Traps
     public class StalactiteUp : MonoBehaviour
     {
         [SerializeField] private float gravityScale;
-        
-        private void Start() => gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+        private AudioSource _audioSource;
+
+        private void Start()
+        {
+            _audioSource = GetComponent<AudioSource>();
+            gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+        }
         
         public void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag(Fields.Tags.PlayerTag))
+            {
+                _audioSource.Play();
                 GetComponent<Rigidbody2D>().gravityScale = gravityScale;
+            }
         }
 
         private void OnCollisionStay2D(Collision2D other)

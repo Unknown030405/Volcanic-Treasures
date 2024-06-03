@@ -6,11 +6,13 @@ public class Door : MonoBehaviour
 {
     private Collider2D _collider2D;
     private Animator _animator;
+    private AudioSource _audioSource;
     
     private void Awake()
     { 
         _collider2D = GetComponent<Collider2D>();
         _animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -25,6 +27,7 @@ public class Door : MonoBehaviour
                 key.Rigidbody.velocity = new Vector2(0, 0);
                 _animator.Play(Fields.AnimationState.Door);
                 Destroy(key.gameObject);
+                _audioSource.Play();
                 Invoke(nameof(ChangeTriggerState), Fields.DoorOpenTime);
             }
         }

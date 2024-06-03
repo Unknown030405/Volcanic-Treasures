@@ -10,11 +10,13 @@ public class Key : MonoBehaviour
     
     private bool _active;
     private Player _player;
+    private AudioSource _audioSource;
     
     private void Awake()
     {
         Rigidbody = GetComponent<Rigidbody2D>();
         _player = GameObject.FindWithTag(Fields.Tags.PlayerTag).GetComponent<Player>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -45,6 +47,7 @@ public class Key : MonoBehaviour
         // Если контактирующий объект игрок
         if (other.CompareTag(Fields.Tags.PlayerTag) && !_player.Key)
         {
+            _audioSource.Play();
             _player.Key = this;
             _active = true;
         } 

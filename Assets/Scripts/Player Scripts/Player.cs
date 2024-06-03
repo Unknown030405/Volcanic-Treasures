@@ -52,7 +52,10 @@ namespace Player_Scripts
             PlayerPrefs.SetInt("Coins", Coins);
             PlayerPrefs.SetInt("Diamonds", Diamonds);
             PlayerPrefs.SetInt("Distance", (int)MaxPlayerDistance * Coins);
-            PlayerPrefs.SetInt("MaxDistance", Math.Max((int)MaxPlayerDistance * Coins, PlayerPrefs.GetInt("MaxDistance")));
+            PlayerPrefs.SetInt("MaxDistance", Math.Max((int)MaxPlayerDistance + 
+                                                       Fields.Score.CoinMultiplier * Coins +
+                                                       Fields.Score.DiamondMultiplier * Diamonds, 
+                                                        PlayerPrefs.GetInt("MaxDistance")));
             DeathEvent?.Invoke(this, EventArgs.Empty);
             gameObject.GetComponent<Movement>().Freeze();
         }
