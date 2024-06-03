@@ -85,6 +85,30 @@ public static class Fields
           public const float YOffset = 3f;
      }
 
+     public static class Scoreboard
+     {
+          public const string EmptyScore = "-";
+          public const string EmptyName = "-";
+          public const string privateCode = "BYQx1VscdE2NTwBAkz66NgqHwFtwSJ2kOAzq4MNVnwLw";
+          public const string publicCode = "665d86768f40bb12c863015d";
+          public const string webURL = "http://dreamlo.com/lb/";
+          public const string RankSeparator = ".";
+          public const string LoadingName = "Fetching...";
+     }
+
+     public static class Requests
+     {
+          public const string QuerrySeparator = "/";
+          public const string EntrySeparator = "|";
+          public const string LineSeparator = "\n";
+          public const string AddRequest = "/add/";
+          public const string GetFromStartRequest = "/pipe/0/";
+          public const string GetByNameRequest = "/pipe-get/";
+          public const string SuccessMessage = ":Recived: ";
+          public const string ProtocolErrorMessage = ":HTTP Error: ";
+          public const string DefaultErrorMessage = ":Error: ";
+     }
+
      public const int DiamondsAmount = 1;
      public const float DoorOpenTime = 0.8f;
 }

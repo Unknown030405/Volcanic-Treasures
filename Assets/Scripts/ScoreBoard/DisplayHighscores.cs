@@ -5,37 +5,46 @@ using UnityEngine.UI;
 
 public class DisplayHighscores : MonoBehaviour 
 {
-    public TMPro.TextMeshProUGUI[] rNames;
-    public TMPro.TextMeshProUGUI[] rScores;
-    HighScores myScores;
+    [SerializeField] private TMPro.TextMeshProUGUI[] rRanks;
+    [SerializeField] private TMPro.TextMeshProUGUI[] rNames;
+    [SerializeField] private TMPro.TextMeshProUGUI[] rScores;
+    private HighScores myScores;
 
     void Start() //Fetches the Data at the beginning
     {
-        for (int i = 0; i < rNames.Length;i ++)
-        {
-            rNames[i].text = i + 1 + ". Fetching...";
-        }
         myScores = GetComponent<HighScores>();
-        StartCoroutine("RefreshHighscores");
+        StartCoroutine(RefreshHighscores());
     }
-    public void SetScoresToMenu(PlayerScore[] highscoreList) //Assigns proper name and score for each text value
+    public void SetScoresToMenu(PlayerScore[] highscoreList) // Assigns proper name and score for each text value
     {
-        for (int i = 0; i < rNames.Length;i ++)
+        for (var i = 0; i < rNames.Length; i++)
         {
-            rNames[i].text = i + 1 + ". ";
+            rRanks[i].text = i + 1 + Fields.Scoreboard.RankSeparator;
             if (highscoreList.Length > i)
             {
                 rScores[i].text = highscoreList[i].score.ToString();
                 rNames[i].text = highscoreList[i].username;
             }
+            else {
+                rScores[i].text = Fields.Scoreboard.EmptyScore;
+                rNames[i].text = Fields.Scoreboard.EmptyName;
+            }
         }
     }
-    IEnumerator RefreshHighscores() //Refreshes the scores every 30 seconds
+
+    public void RefreshLeaderboard() 
     {
-        while(true)
+        StartCoroutine(RefreshHighscores());
+    }
+    private IEnumerator RefreshHighscores() //Refreshes the scores every call
+    {
+        for (var i = 0; i < rNames.Length; i++)
         {
-            myScores.DownloadScores();
-            yield return new WaitForSeconds(30);
+            rRanks[i].text = i + 1 + Fields.Scoreboard.RankSeparator;
+            rNames[i].text = Fields.Scoreboard.LoadingName;
+            rScores[i].text = Fields.Scoreboard.EmptyScore;
         }
+        myScores.DownloadScores();
+        yield return null;
     }
 }
