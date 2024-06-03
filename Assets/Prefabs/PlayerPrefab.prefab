@@ -532,15 +532,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3328913814101456637}
-        m_TargetAssemblyTypeName: UI.PauseMenu, Assembly-CSharp
-        m_MethodName: Resume
-        m_Mode: 1
+        m_TargetAssemblyTypeName: UI.SubMenu, Assembly-CSharp
+        m_MethodName: OnPause
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Block1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &1762882414803553240
@@ -762,7 +762,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 9b4afbb951d5338439d198badf0c9b91, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -784,7 +784,7 @@ GameObject:
   - component: {fileID: 7568975662786523407}
   - component: {fileID: 9064242168394376088}
   m_Layer: 5
-  m_Name: ResumePanel
+  m_Name: ResultPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1046,15 +1046,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3328913814101456637}
-        m_TargetAssemblyTypeName: UI.PauseMenu, Assembly-CSharp
-        m_MethodName: LoadMenu
-        m_Mode: 1
+        m_TargetAssemblyTypeName: UI.SubMenu, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Menu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &3589779884696878899
@@ -1978,7 +1978,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 623461dc65e7b9248b0dac6f97005c73, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2185,14 +2185,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3328913814101456637}
         m_TargetAssemblyTypeName: UI.SubMenu, Assembly-CSharp
-        m_MethodName: LoadStart
-        m_Mode: 1
+        m_MethodName: LoadScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Block1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &5314635168639718201
@@ -2664,15 +2664,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3328913814101456637}
-        m_TargetAssemblyTypeName: UI.PauseMenu, Assembly-CSharp
-        m_MethodName: LoadMenu
-        m_Mode: 1
+        m_TargetAssemblyTypeName: UI.SubMenu, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Menu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &5924022055736595703
@@ -3241,7 +3241,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: af952d94208afca4f8077edc725aabb6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3689,3 +3689,6 @@ MonoBehaviour:
   pauseGameMenu: {fileID: 4157460164177374385}
   deathMenu: {fileID: 3941386906554415129}
   player: {fileID: 7316868536060165387}
+  totalCoinsText: {fileID: 3809428003766696466}
+  totalDiamondsText: {fileID: 1953521505049976946}
+  totalDistanceText: {fileID: 8970118269685768677}

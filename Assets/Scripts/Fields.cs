@@ -36,6 +36,8 @@ public static class Fields
           public const float BlockSpeedIncrease = 0.01f;
           public const float LavaPosition = -20;
           public const float LavaOffset = 9;
+          public const int BlocksNumberOffset = 2;
+          public const int TransformPos = 1;
      }
 
      public static class Buffs
@@ -52,6 +54,8 @@ public static class Fields
           public const int Space = 150;
           public const int PointX = 50;
           public const int PointY = 50;
+          public const float ResumeTimeScale = 1f;
+          public const float PauseTimeScale = 0f;
      }
 
      public static class Coins

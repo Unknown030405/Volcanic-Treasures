@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: -634486149, guid: cbd2ad4c894c4d64697b6b5aa1d9bde8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -144,8 +144,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b2f0e4112fa47a42814bef7f80ae223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorCollider: {fileID: 276833921460459473}
-  doorAnimator: {fileID: 7735038405620930621}
 --- !u!95 &7735038405620930621
 Animator:
   serializedVersion: 5

@@ -28,7 +28,11 @@ namespace Block_Scripts
             {
                 _hasSpawned = true;
                 
-                var pos = new Vector3(0, transform.position.y + Fields.Generation.BlockSize, 0);
+                var yPos = GetComponentsInParent<Transform>();
+                var pos = new Vector3(0,
+                    yPos[Fields.Generation.TransformPos].position.y
+                    + Fields.Generation.BlocksNumberOffset * Fields.Generation.BlockSize, 0);
+
                 CreateBlock(_blocks[Random.Range(0, _blocks.Length)], pos);
             }
         }

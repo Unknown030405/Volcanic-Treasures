@@ -1,4 +1,7 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -31,7 +34,10 @@ namespace UI
         {
             coinsText.text = _player.Coins.ToString();
             diamondsText.text = _player.Diamonds.ToString();
+            var intDistance = (int)_player.Distance;
+            distanceText.text = intDistance.ToString();
             CheckDelay();
+            // _player.BuffEvent += StartCooldown;
         }
 
         private void CheckDelay()
@@ -51,6 +57,39 @@ namespace UI
                 key.GetChild(1).GetComponent<Image>().fillAmount = imageState;
             }
         }
+
+        // private void StartCooldown(object sender, EventArgs e)
+        // {
+        //     var args = (UIEventArgs)e;
+        //     StartCoroutine(BuffCooldown(args.Image));
+        // }
+
+        // private IEnumerator BuffCooldown(Transform key)
+        // {
+        //     AddBuffToCanvas(key);
+        //     
+        //     if (_buffs.ContainsKey(key))
+        //     {
+        //         while (_buffs[key] > 0)
+        //         {
+        //             var imageState = _buffs[key] / Fields.Buffs.UsingTime;
+        //             key.GetChild(1).GetComponent<Image>().fillAmount = imageState;
+        //             _buffs[key] -= Time.deltaTime;
+        //             yield return new WaitForEndOfFrame();
+        //         }
+        //
+        //         _buffs.Remove(key);
+        //         key.gameObject.SetActive(false);
+        //         StartCoroutine(MoveLeft);
+        //     }
+        //
+        //     yield return null;
+        // }
+        //
+        // private void StartCoroutine(Action methodName)
+        // {
+        //     throw new NotImplementedException();
+        // }
 
         private void AddBuffToCanvas(Transform key)
         {
@@ -75,5 +114,18 @@ namespace UI
                 shiftPosition++;
             }
         }
+        
+        // private IEnumerator SmoothedMoveLeft()
+        // {
+        //     // сдвигает список баффов влево
+        //     var shiftPosition = Fields.UIBehaviour.Shift;
+        //     foreach (var key in _buffs.Keys)
+        //     {
+        //         var pointX = shiftPosition * (Fields.UIBehaviour.Space + key.localScale.x);
+        //         key.position = new Vector3(pointX, Fields.UIBehaviour.PointY, key.position.z);
+        //         shiftPosition++;
+        //     }
+        //     yield return null;
+        // }
     }
 }

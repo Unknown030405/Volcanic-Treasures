@@ -1,3 +1,5 @@
+using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static Fields;
@@ -11,56 +13,38 @@ namespace UI
         [SerializeField] private GameObject pauseGameMenu;
         [SerializeField] private GameObject deathMenu;
         [SerializeField] private Player player;
+        [SerializeField] private TMP_Text totalCoinsText;
+        [SerializeField] private TMP_Text totalDiamondsText;
+        [SerializeField] private TMP_Text totalDistanceText;
         
-        private const float ResumeTimeScale = 1f;
-        private const float PauseTimeScale = 0f;
-        
-        private void Update() 
+        private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape) && !deathMenu.activeSelf)
-            {
-                if (pauseGame)
-                    Resume();
-                else
-                    Pause();
-            }
-            CheckPlayer();
+                OnPause(pauseGame);
+            // CheckPlayer();
+            player.DeathEvent += OnDeathUI;
         }
 
-        public void Resume()
+        public void OnPause(bool isActive)
         {
-            pauseGameMenu.SetActive(false);
-            Time.timeScale = ResumeTimeScale;
-            pauseGame = false;
+            pauseGameMenu.SetActive(isActive);
+            Time.timeScale = isActive ? Fields.UIBehaviour.PauseTimeScale : Fields.UIBehaviour.ResumeTimeScale;
+            pauseGame = !isActive;
         }
 
-        public void Pause()
+        public void LoadScene(string sceneName)
         {
-            pauseGameMenu.SetActive(true);
-            Time.timeScale = PauseTimeScale;
-            pauseGame = true;
+            Time.timeScale = Fields.UIBehaviour.ResumeTimeScale;
+            SceneManager.LoadScene(sceneName);
         }
-
-        public void LoadMenu()
+        
+        private void OnDeathUI(object sender, EventArgs e)
         {
-            Time.timeScale = ResumeTimeScale;
-            SceneManager.LoadScene(Scenes.Menu);
-        }
-
-        public void LoadStart()
-        {
-            Time.timeScale = ResumeTimeScale;
-            player.gameObject.SetActive(true);
-            SceneManager.LoadScene(Scenes.Block1);
-        }
-
-        public void CheckPlayer()
-        {
-            if (!player.gameObject.activeSelf)
-            {
-                Time.timeScale = 0f;
-                deathMenu.SetActive(true);
-            }
+            Time.timeScale = Fields.UIBehaviour.PauseTimeScale;
+            deathMenu.SetActive(true);
+            totalCoinsText.text = PlayerPrefs.GetInt("Coins").ToString();
+            totalDiamondsText.text = PlayerPrefs.GetInt("Diamonds").ToString();
+            totalDistanceText.text = PlayerPrefs.GetInt("Distance").ToString();
         }
     }
 }

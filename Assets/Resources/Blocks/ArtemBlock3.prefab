@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5406917653735269983}
   - component: {fileID: 8911216867267800129}
+  - component: {fileID: 5889031842796146438}
   m_Layer: 6
   m_Name: gravel
   m_TagString: Untagged
@@ -49,6 +50,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delay: 0.1
   crack: {fileID: 1779875672, guid: 90b8d9ad4309069428c1c668e36c5e5b, type: 3}
+--- !u!61 &5889031842796146438
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55994680012976675}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -8, y: 14.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &474239115771834178
 GameObject:
   m_ObjectHideFlags: 0
@@ -892,6 +938,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9103816559193031257}
   - component: {fileID: 5925493059408428293}
+  - component: {fileID: 7318795415460375742}
   m_Layer: 6
   m_Name: gravel (2)
   m_TagString: Untagged
@@ -933,6 +980,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delay: 0.2
   crack: {fileID: 1779875672, guid: 90b8d9ad4309069428c1c668e36c5e5b, type: 3}
+--- !u!61 &7318795415460375742
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2825004523426878411}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -1, y: 14.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 5, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &2825206891542964724
 GameObject:
   m_ObjectHideFlags: 0
@@ -2324,7 +2416,7 @@ Tilemap:
       - {fileID: 548258970, guid: d4d3d8d994c554d4989f35113adb0e7c, type: 3}
       - {fileID: 1071838384, guid: d4d3d8d994c554d4989f35113adb0e7c, type: 3}
       - {fileID: 185226819, guid: d4d3d8d994c554d4989f35113adb0e7c, type: 3}
-      m_AnimationSpeed: 5
+      m_AnimationSpeed: 5.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -3, y: 6, z: 0}
@@ -2408,7 +2500,7 @@ Tilemap:
       - {fileID: 548258970, guid: d4d3d8d994c554d4989f35113adb0e7c, type: 3}
       - {fileID: 1071838384, guid: d4d3d8d994c554d4989f35113adb0e7c, type: 3}
       - {fileID: 185226819, guid: d4d3d8d994c554d4989f35113adb0e7c, type: 3}
-      m_AnimationSpeed: 5.0000005
+      m_AnimationSpeed: 5
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -10, y: 8, z: 0}
@@ -5768,7 +5860,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.03766918}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -5779,7 +5871,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.92466164}
   m_EdgeRadius: 0
 --- !u!1 &6641347221688163886
 GameObject:
@@ -6398,6 +6490,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2038516524283905590}
   - component: {fileID: 3465303003684664150}
+  - component: {fileID: 9080409238808353272}
   m_Layer: 6
   m_Name: gravel (3)
   m_TagString: Untagged
@@ -6437,6 +6530,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delay: 0.1
   crack: {fileID: 1779875672, guid: 90b8d9ad4309069428c1c668e36c5e5b, type: 3}
+--- !u!61 &9080409238808353272
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8028101739749228902}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 4.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &8759930510246312414
 GameObject:
   m_ObjectHideFlags: 0

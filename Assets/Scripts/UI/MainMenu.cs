@@ -7,8 +7,8 @@ namespace UI
     {
         public void PlayGame()
         {
-            // Загружаем следующую по индексу сцену
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            // Загружаем стартовую сцену
+            SceneManager.LoadScene(Fields.Scenes.Block1);
         }
 
         public void ExitGame()
