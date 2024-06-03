@@ -1,19 +1,19 @@
+using TMPro;
 using UnityEngine;
 
 namespace UI
 {
-    public class DeathMenu : MonoBehaviour
+    public class DeathMenu : SceneLoader
     {
-        // Start is called before the first frame update
-        void Start()
-        {
+        [SerializeField] private TMP_Text totalCoinsText;
+        [SerializeField] private TMP_Text totalDiamondsText;
+        [SerializeField] private TMP_Text totalDistanceText;
         
-        }
-
-        // Update is called once per frame
-        void Update()
+        private void Start()
         {
-        
+            totalCoinsText.GetComponent<CountAnimation>().SetTarget(PlayerPrefs.GetInt("Coins"));
+            totalDiamondsText.GetComponent<CountAnimation>().SetTarget( PlayerPrefs.GetInt("Diamonds"));
+            totalDistanceText.GetComponent<CountAnimation>().SetTarget(PlayerPrefs.GetInt("Distance"));
         }
     }
 }

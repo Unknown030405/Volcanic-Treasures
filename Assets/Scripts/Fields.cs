@@ -21,6 +21,7 @@ public static class Fields
      {
           public const string Door = "Door";
           public const string Chest = "Chest";
+          public const string Fade = "FadeAnimation";
      }
 
      public static class Paths

@@ -9,7 +9,7 @@ namespace Traps
 
         public void OnCollisionEnter2D(Collision2D other)
         {
-            if (other.gameObject.CompareTag(Fields.Tags.PlayerTag))
+            if (other.gameObject.CompareTag(Fields.Tags.PlayerTag) && other.GetContact(0).normal == Vector2.down)
             {
                 foreach (var block in gameObject.GetComponentsInChildren<SpriteRenderer>())
                     block.sprite = crack;

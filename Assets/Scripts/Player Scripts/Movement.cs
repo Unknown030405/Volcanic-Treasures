@@ -24,6 +24,12 @@ namespace Player_Scripts
         [SerializeField] private float speed;
         [SerializeField] private float jumpForce;
 
+        public void Freeze()
+        {
+            speed = 0;
+            jumpForce = 0;
+        }
+        
         public void SetSpeed(float acceleration) => speed *= acceleration;
         
         public void ResetSpeed(float acceleration) => speed /= acceleration;
