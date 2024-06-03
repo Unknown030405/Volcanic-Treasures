@@ -46,10 +46,6 @@ namespace Player_Scripts
                 if (IsOnSlope())
                     rb.velocity = new Vector2(0, jumpForce + 2);
             }
-            
-            // Огроничитель скорости на лестнице и наклонной поверхности
-            /*if ((IsOnLadder() || IsOnSlope()) && rb.velocity.magnitude > speed)
-                rb.velocity = rb.velocity.normalized * speed;*/
         }
 
         private void FixedUpdate()

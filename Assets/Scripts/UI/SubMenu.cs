@@ -11,18 +11,17 @@ namespace UI
     {
         [SerializeField] private bool pauseGame;
         [SerializeField] private GameObject pauseGameMenu;
-        [SerializeField] private GameObject deathMenu;
         [SerializeField] private Player player;
         [SerializeField] private TMP_Text totalCoinsText;
         [SerializeField] private TMP_Text totalDiamondsText;
         [SerializeField] private TMP_Text totalDistanceText;
-        
+
+        private void Start() => player.DeathEvent += OnDeathUI;
+
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape) && !deathMenu.activeSelf)
+            if (Input.GetKeyDown(KeyCode.Escape))
                 OnPause(pauseGame);
-            // CheckPlayer();
-            player.DeathEvent += OnDeathUI;
         }
 
         public void OnPause(bool isActive)
@@ -41,7 +40,7 @@ namespace UI
         private void OnDeathUI(object sender, EventArgs e)
         {
             Time.timeScale = Fields.UIBehaviour.PauseTimeScale;
-            deathMenu.SetActive(true);
+            LoadScene("DeathScene");
             totalCoinsText.text = PlayerPrefs.GetInt("Coins").ToString();
             totalDiamondsText.text = PlayerPrefs.GetInt("Diamonds").ToString();
             totalDistanceText.text = PlayerPrefs.GetInt("Distance").ToString();
