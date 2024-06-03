@@ -1,6 +1,7 @@
 using Interfaces;
 using Player_Scripts;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 public class Coin : MonoBehaviour, ILootable
 {
@@ -12,6 +13,7 @@ public class Coin : MonoBehaviour, ILootable
     {
         if (!gameObject.CompareTag(Fields.Tags.Chest) && other.CompareTag(Fields.Tags.PlayerTag))
         {
+            GetComponent<AudioSource>().enabled = true;
             _player.AddCoins(Fields.Coins.Min);
             Destroy(gameObject);
             Debug.Log("Coin claimed");
