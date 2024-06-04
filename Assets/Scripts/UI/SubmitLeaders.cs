@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using ScoreBoard;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -13,14 +14,15 @@ public class SubmitLeaders : MonoBehaviour
     private TextMeshProUGUI score;
     [SerializeField]
     private AudioMixer mixer;
-    private bool muted = false;
+    private bool _muted = false;
 
     public void SubmitToScoreboard()
     {
-        HighScores.instance.UploadScore(username.text, int.Parse(score.text));
+        HighScores.Instance.UploadScore(username.text, int.Parse(score.text));
     }
 
     public void SwitchSound() {
-        Debug.Log(mixer.SetFloat("Master", muted ? -4f : -80f));
+        mixer.SetFloat(Fields.Audio.MasterVolumeName, _muted ? Fields.Audio.NormalVolume : Fields.Audio.MinVolume);
+        _muted = !_muted;
     }
 }

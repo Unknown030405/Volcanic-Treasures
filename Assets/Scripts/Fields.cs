@@ -17,6 +17,13 @@ public static class Fields
           public const string Menu = "Menu";
      }
 
+     public static class Audio
+     {
+          public const string MasterVolumeName = "MasterVolume";
+          public const float NormalVolume = -6f;
+          public const float MinVolume = -80f;
+     }
+
      public static class AnimationState
      {
           public const string Door = "Door";
@@ -108,6 +115,12 @@ public static class Fields
           public const string SuccessMessage = ":Recived: ";
           public const string ProtocolErrorMessage = ":HTTP Error: ";
           public const string DefaultErrorMessage = ":Error: ";
+     }
+
+     public static class Score
+     {
+          public const int CoinMultiplier = 5;
+          public const int DiamondMultiplier = 20;
      }
 
      public const int DiamondsAmount = 1;
