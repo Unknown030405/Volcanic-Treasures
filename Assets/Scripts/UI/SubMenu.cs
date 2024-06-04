@@ -6,7 +6,6 @@ namespace UI
 {
     public class SubMenu : SceneLoader
     {
-        [SerializeField] private bool pauseGame = true;
         [SerializeField] private GameObject pauseGameMenu;
         [SerializeField] private Player player;
         private bool _pauseGame = true;

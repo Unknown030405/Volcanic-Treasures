@@ -85,27 +85,21 @@ public static class Fields
           public const float ZOffset = -10f;
           public const float YOffset = 3f;
      }
-     
-     public static class Score
-     {
-          public const int CoinMultiplier = 2;
-          public const int DiamondMultiplier = 40;
-     }
-
+    
      public static class Scoreboard
      {
           public const string EmptyScore = "-";
           public const string EmptyName = "-";
-          public const string privateCode = "BYQx1VscdE2NTwBAkz66NgqHwFtwSJ2kOAzq4MNVnwLw";
-          public const string publicCode = "665d86768f40bb12c863015d";
-          public const string webURL = "http://dreamlo.com/lb/";
+          public const string PrivateCode = "BYQx1VscdE2NTwBAkz66NgqHwFtwSJ2kOAzq4MNVnwLw";
+          public const string PublicCode = "665d86768f40bb12c863015d";
+          public const string WebURL = "http://dreamlo.com/lb/";
           public const string RankSeparator = ".";
           public const string LoadingName = "Fetching...";
      }
 
      public static class Requests
      {
-          public const string QuerrySeparator = "/";
+          public const string QuerySeparator = "/";
           public const string EntrySeparator = "|";
           public const string LineSeparator = "\n";
           public const string AddRequest = "/add/";

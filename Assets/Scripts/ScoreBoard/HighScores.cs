@@ -2,92 +2,99 @@
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class HighScores : MonoBehaviour
+namespace ScoreBoard
 {
-    private PlayerScore[] scoreList;
-    private DisplayHighscores myDisplay;
-
-    public static HighScores instance;
-    private delegate void RequestAnswerCallback(string message);
-    public delegate void DatabaseAnswerCallback(PlayerScore playerScore);
-
-    private void Awake()
+    public class HighScores : MonoBehaviour
     {
-        instance = this; //Sets Static Instance
-        myDisplay = GetComponent<DisplayHighscores>();
-    }
-    private IEnumerator SendDatabaseRequest(string uri, RequestAnswerCallback callback)
-    {
-        var request = UnityWebRequest.Get(Fields.Scoreboard.webURL + uri);
-        yield return request.SendWebRequest();
+        private PlayerScore[] _scoreList;
+        private DisplayHighscores _myDisplay;
 
-        string[] pages = uri.Split('/');
-        int page = pages.Length - 1;
+        public static HighScores Instance;
+        private delegate void RequestAnswerCallback(string message);
+        public delegate void DatabaseAnswerCallback(PlayerScore playerScore);
 
-        switch (request.result)
+        private void Awake()
         {
-            case UnityWebRequest.Result.ConnectionError:
-            case UnityWebRequest.Result.DataProcessingError:
-                Debug.LogError(pages[page] + Fields.Requests.DefaultErrorMessage + request.error);
-                break;
-            case UnityWebRequest.Result.ProtocolError:
-                Debug.LogError(pages[page] + Fields.Requests.ProtocolErrorMessage + request.error);
-                break;
-            case UnityWebRequest.Result.Success:
-                Debug.Log(pages[page] + Fields.Requests.SuccessMessage + request.downloadHandler.text);
-                callback(request.downloadHandler.text);
-                break;
+            Instance = this; //Sets Static Instance
+            _myDisplay = GetComponent<DisplayHighscores>();
         }
-    }
-    public void UploadScore(string username, int score)
-    {
-        // form an uri without webURL
-        var uri = Fields.Scoreboard.privateCode + Fields.Requests.AddRequest + username + Fields.Requests.QuerrySeparator + score;
-        StartCoroutine(SendDatabaseRequest(uri, (string _) => {DownloadScores();}));
-    }
+        
+        private IEnumerator SendDatabaseRequest(string uri, RequestAnswerCallback callback)
+        {
+            var request = UnityWebRequest.Get(Fields.Scoreboard.WebURL + uri);
+            yield return request.SendWebRequest();
+
+            var pages = uri.Split('/');
+            var page = pages.Length - 1;
+
+            switch (request.result)
+            {
+                case UnityWebRequest.Result.ConnectionError:
+                case UnityWebRequest.Result.DataProcessingError:
+                    Debug.LogError(pages[page] + Fields.Requests.DefaultErrorMessage + request.error);
+                    break;
+                case UnityWebRequest.Result.ProtocolError:
+                    Debug.LogError(pages[page] + Fields.Requests.ProtocolErrorMessage + request.error);
+                    break;
+                case UnityWebRequest.Result.Success:
+                    Debug.Log(pages[page] + Fields.Requests.SuccessMessage + request.downloadHandler.text);
+                    callback(request.downloadHandler.text);
+                    break;
+            }
+        }
+        
+        public void UploadScore(string username, int score)
+        {
+            // form an uri without webURL
+            var uri = Fields.Scoreboard.PrivateCode + Fields.Requests.AddRequest + username + Fields.Requests.QuerySeparator + score;
+            StartCoroutine(SendDatabaseRequest(uri, _ => {DownloadScores();}));
+        }
     
-    public void DownloadScores(int amount = 10)
-    {
-        var uri = Fields.Scoreboard.publicCode + Fields.Requests.GetFromStartRequest + amount.ToString();
-        StartCoroutine(SendDatabaseRequest(uri, DownloadCallback));
-    }
-    private void DownloadCallback(string message) {
-        OrganizeInfo(message);
-        myDisplay.SetScoresToMenu(scoreList);
-    }
-
-    public void GetPlayerScoreByName(string username, DatabaseAnswerCallback callback) {
-        var uri = Fields.Scoreboard.publicCode + Fields.Requests.GetByNameRequest + username;
-        StartCoroutine(SendDatabaseRequest(uri, (string msg) => {callback(ParseEntry(msg));}));
-    }
-
-    // // Divides Scoreboard info into scoreList
-    private void OrganizeInfo(string rawData)
-    {
-        var entries = rawData.Split(Fields.Requests.LineSeparator, System.StringSplitOptions.RemoveEmptyEntries); // get all entries
-        scoreList = new PlayerScore[entries.Length];
-        for (var i = 0; i < entries.Length; i++)
+        public void DownloadScores(int amount = 10)
         {
-            scoreList[i] = ParseEntry(entries[i]);
+            var uri = Fields.Scoreboard.PublicCode + Fields.Requests.GetFromStartRequest + amount.ToString();
+            StartCoroutine(SendDatabaseRequest(uri, DownloadCallback));
+        }
+        
+        private void DownloadCallback(string message) 
+        {
+            OrganizeInfo(message);
+            _myDisplay.SetScoresToMenu(_scoreList);
+        }
+
+        public void GetPlayerScoreByName(string username, DatabaseAnswerCallback callback) 
+        {
+            var uri = Fields.Scoreboard.PublicCode + Fields.Requests.GetByNameRequest + username;
+            StartCoroutine(SendDatabaseRequest(uri, msg => {callback(ParseEntry(msg));}));
+        }
+
+        // // Divides Scoreboard info into scoreList
+        private void OrganizeInfo(string rawData)
+        {
+            var entries = rawData.Split(Fields.Requests.LineSeparator, System.StringSplitOptions.RemoveEmptyEntries); // get all entries
+            _scoreList = new PlayerScore[entries.Length];
+            for (var i = 0; i < entries.Length; i++)
+                _scoreList[i] = ParseEntry(entries[i]);
+        }
+        
+        private PlayerScore ParseEntry(string dbEntry)
+        {
+            var entryInfo = dbEntry.Split(Fields.Requests.EntrySeparator);
+            var username = entryInfo[0];
+            var score = int.Parse(entryInfo[1]);
+            return new PlayerScore(username, score);
         }
     }
-    private PlayerScore ParseEntry(string dbEntry)
-    {
-        var entryInfo = dbEntry.Split(Fields.Requests.EntrySeparator);
-        var username = entryInfo[0];
-        var score = int.Parse(entryInfo[1]);
-        return new PlayerScore(username, score);
-    }
-}
 
-public struct PlayerScore
-{
-    public string username;
-    public int score;
-
-    public PlayerScore(string _username, int _score)
+    public struct PlayerScore
     {
-        username = _username;
-        score = _score;
+        public readonly string Username;
+        public readonly int Score;
+
+        public PlayerScore(string username, int score)
+        {
+            Username = username;
+            Score = score;
+        }
     }
 }
