@@ -40,7 +40,7 @@ public class DisplayHighscores : MonoBehaviour
     {
         for (var i = 0; i < rNames.Length; i++)
         {
-            rRanks[i].text = i + 1 + Fields.Scoreboard.RankSeparator;
+            rRanks[i].text = (i + 1) + Fields.Scoreboard.RankSeparator;
             rNames[i].text = Fields.Scoreboard.LoadingName;
             rScores[i].text = Fields.Scoreboard.EmptyScore;
         }
