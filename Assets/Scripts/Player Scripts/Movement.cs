@@ -6,10 +6,6 @@ namespace Player_Scripts
     // Данный скрипт висит на игроке и отвечает за управление им
     public class Movement : MonoBehaviour
     {
-        
-        private bool _isLadder;
-        private static readonly int HorizontalMove = Animator.StringToHash("HorizontalMove");
-
         [SerializeField] private Rigidbody2D rb;
         [SerializeField] private Animator animator;
         [SerializeField] private SpriteRenderer sprite;
@@ -24,6 +20,8 @@ namespace Player_Scripts
         [SerializeField] private float speed;
         [SerializeField] private float jumpForce;
 
+        private bool _isLadder;
+        
         public void Freeze()
         {
             speed = 0;
@@ -31,12 +29,24 @@ namespace Player_Scripts
         }
         
         public void SetSpeed(float acceleration) => speed *= acceleration;
+
+        public void ResetSpeed(float acceleration)
+        {
+            if (Math.Abs(acceleration) < float.Epsilon)
+                throw new DivideByZeroException();
+            
+            speed /= acceleration;
+        }
         
-        public void ResetSpeed(float acceleration) => speed /= acceleration;
+        public void SetJumpForce(float jumpCoefficient) => jumpForce *= jumpCoefficient;
         
-        public void SetJumpForce(float acceleration) => jumpForce *= acceleration;
-        
-        public void ResetJumpForce(float acceleration) => jumpForce /= acceleration;
+        public void ResetJumpForce(float jumpCoefficient)
+        { 
+            if (Math.Abs(jumpCoefficient) < float.Epsilon)
+                throw new DivideByZeroException();
+            
+            jumpForce /= jumpCoefficient;
+        }
         
         private void Update()
         {
@@ -50,18 +60,18 @@ namespace Player_Scripts
                 if (IsGrounded())
                     rb.velocity = new Vector2(0, jumpForce);
                 if (IsOnSlope())
-                    rb.velocity = new Vector2(0, jumpForce + 2);
+                    rb.velocity = new Vector2(0, jumpForce + Fields.Player.SlopeJumpIncrease);
             }
         }
 
         private void FixedUpdate()
         {
-            // Горизонтальное управление (A / D)
-            var horizontal = Input.GetAxis("Horizontal");
+            // Горизонтальное управление (A / D + leftArrow / rightArrow)
+            var horizontal = Input.GetAxis(Fields.Player.HorizontalAxisName);
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
             
             // Анимация движения при беге
-            animator.SetFloat(HorizontalMove, Math.Abs(horizontal));
+            animator.SetFloat(Fields.AnimationState.PlayerMove, Math.Abs(horizontal));
             sprite.flipX = horizontal < 0;
         }
         

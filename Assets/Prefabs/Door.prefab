@@ -145,6 +145,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b2f0e4112fa47a42814bef7f80ae223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  col: {fileID: 276833921460459473}
+  animator: {fileID: 7735038405620930621}
+  audioSource: {fileID: 2130504548157291629}
 --- !u!95 &7735038405620930621
 Animator:
   serializedVersion: 5

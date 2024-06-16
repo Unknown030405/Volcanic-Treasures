@@ -7,55 +7,43 @@ namespace Player_Scripts
     public class Player : MonoBehaviour
     {
         public event EventHandler DeathEvent;
-        // public event EventHandler BuffEvent;
-        public int TotalCoins { get; set; }
-        public int TotalDiamonds { get; set; }
-        public int TotalDistance { get; set; }
         
+        public Dictionary<Transform, float> Effects { get; } = new();
+        public Key Key { get; set; }
         public int Coins { get; private set; }
         public int Diamonds { get; private set; }
-        private float PlayerDistance { get; set; }
-        private float MaxPlayerDistance { get; set; }
         public bool HasHelmet { get; set; }
         public bool HasRingLava { get; set; }
-        public Key Key { get; set; }
-        public Dictionary<Transform, float> Effects { get; } = new();
-
-        private void Awake()
-        {
-            TotalCoins = PlayerPrefs.GetInt("Coins", 0);
-            TotalDiamonds = PlayerPrefs.GetInt("Diamonds", 0);
-            TotalDistance = PlayerPrefs.GetInt("Distance", 0);
-        }
-
+        
+        private float _playerDistance;
+        private float _maxPlayerDistance;
+        
         public void AddCoins(int coinsAmount) => Coins += coinsAmount;
         public void AddDiamonds(int diamondsAmount) => Diamonds += diamondsAmount;
 
         private void Update()
         {
-            var blockSpeed = 
-                Fields.Generation.BlockBaseSpeed + Time.timeSinceLevelLoad * Fields.Generation.BlockSpeedIncrease;
-            PlayerDistance += blockSpeed * Time.deltaTime;
-            MaxPlayerDistance = Math.Max(PlayerDistance + transform.position.y, MaxPlayerDistance);
-            // Debug.Log(Distance);
+            var blockSpeed = Fields.Generation.BlockBaseSpeed + Time.timeSinceLevelLoad * 
+                Fields.Generation.BlockSpeedIncrease;
+            _playerDistance += blockSpeed * Time.deltaTime;
+            _maxPlayerDistance = Math.Max(_playerDistance + transform.position.y, _maxPlayerDistance);
         }
 
-        public int GetPlayerDistance() => (int)MaxPlayerDistance;
-
-        // public void CreateBuffEvent(object obj, UIEventArgs args)
-        // {
-        //     BuffEvent?.Invoke(obj, args);
-        // }
+        public int GetPlayerDistance() => (int)_maxPlayerDistance;
         
         public void Death()
         {
-            PlayerPrefs.SetInt("Coins", Coins);
-            PlayerPrefs.SetInt("Diamonds", Diamonds);
-            PlayerPrefs.SetInt("Distance", (int)MaxPlayerDistance * Coins);
-            PlayerPrefs.SetInt("MaxDistance", Math.Max((int)MaxPlayerDistance + 
-                                                       Fields.Score.CoinMultiplier * Coins +
-                                                       Fields.Score.DiamondMultiplier * Diamonds, 
-                                                        PlayerPrefs.GetInt("MaxDistance")));
+            // Посчитать текущий счёт
+            var score = (int)_maxPlayerDistance + Fields.Score.CoinMultiplier * Coins +
+                        Fields.Score.DiamondMultiplier * Diamonds;
+            
+            PlayerPrefs.SetInt(Fields.SaveSystem.PlayerCoins, Coins);
+            PlayerPrefs.SetInt(Fields.SaveSystem.PlayerDiamonds, Diamonds);
+            PlayerPrefs.SetInt(Fields.SaveSystem.Distance, score);
+            PlayerPrefs.SetInt(Fields.SaveSystem.MaxDistance, Math.Max(score, 
+                PlayerPrefs.GetInt(Fields.SaveSystem.MaxDistance)));
+            
+            // Вызов ивента смерти
             DeathEvent?.Invoke(this, EventArgs.Empty);
             gameObject.GetComponent<Movement>().Freeze();
         }

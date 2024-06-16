@@ -1,16 +1,19 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
-public class FadeAnimation : Image
+namespace UI
 {
-    public override Material materialForRendering
+    public class FadeAnimation : Image
     {
-        get
+        public override Material materialForRendering
         {
-            Material material = new Material(base.materialForRendering);
-            material.SetInt("_StencilComp", (int)CompareFunction.NotEqual);
-            return material;
+            get
+            {
+                var mat = new Material(base.materialForRendering);
+                mat.SetInt(Fields.Fade.FadeMaterial, (int)CompareFunction.NotEqual);
+                return mat;
+            }
         }
     }
 }

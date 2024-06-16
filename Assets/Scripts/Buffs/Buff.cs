@@ -1,8 +1,5 @@
-using System;
 using Interfaces;
-using JetBrains.Annotations;
 using Player_Scripts;
-using UI;
 using UnityEngine;
 
 namespace Buffs
@@ -29,20 +26,14 @@ namespace Buffs
     // Данный класс отвечает за все эффекты игрока, которые можно подобрать из сундука
     public abstract class LootBuffs : Buffs, ILootable
     {
-        protected abstract Transform GetImage();
+        protected abstract Transform GetTransform();
 
         public void GivePlayer()
         {
             AddBuff();
-            var image = GetImage();
-            if (Player.Effects.ContainsKey(image))
-                Player.Effects[image] = Fields.Buffs.UsingTime;
-            else
-            {
-                Player.Effects.Add(image, Fields.Buffs.UsingTime);
-                // Player.CreateBuffEvent(this, new UIEventArgs(image));
-            }
-            Debug.Log("Item Given");
+            
+            var image = GetTransform();
+            Player.Effects[image] = Fields.Buffs.UsingTime;
 
             Invoke(nameof(RemoveBuff), Fields.Buffs.UsingTime);
         }

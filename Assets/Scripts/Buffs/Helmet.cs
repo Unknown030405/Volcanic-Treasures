@@ -9,6 +9,7 @@ namespace Buffs
 
         protected override void RemoveBuff() => Player.HasHelmet = false;
         
-        protected override Transform GetImage() => Canvas.transform.GetChild(0).GetChild(1);
+        protected override Transform GetTransform() => 
+            Canvas.transform.GetChild(Fields.Buffs.PanelIndex).GetChild(Fields.Buffs.HelmetIconIndex);
     }
 }

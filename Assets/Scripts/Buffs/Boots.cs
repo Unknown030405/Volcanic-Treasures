@@ -6,6 +6,7 @@ namespace Buffs
     public class Boots : LootBuffs
     {
         private bool _isClaimed;
+        
         protected override void AddBuff()
         {
             if (!_isClaimed)
@@ -21,6 +22,7 @@ namespace Buffs
             _isClaimed = false;
         }
         
-        protected override Transform GetImage() => Canvas.transform.GetChild(0).GetChild(0);
+        protected override Transform GetTransform() => 
+            Canvas.transform.GetChild(Fields.Buffs.PanelIndex).GetChild(Fields.Buffs.BootsIconIndex);
     }
 }

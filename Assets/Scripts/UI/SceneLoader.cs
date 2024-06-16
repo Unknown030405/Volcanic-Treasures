@@ -11,8 +11,8 @@ namespace UI
         public void LoadSceneByName(string sceneName)
         {
             Time.timeScale = Fields.UIBehaviour.ResumeTimeScale;
-            fadeAnimation.Play(Fields.AnimationState.Fade);
-            StartCoroutine(Delay(1, sceneName));
+            fadeAnimation.Play(Fields.AnimationState.FadeAnimation);
+            StartCoroutine(Delay(Fields.Fade.FadeAnimationTime, sceneName));
         }
 
         public void Exit() => Application.Quit();

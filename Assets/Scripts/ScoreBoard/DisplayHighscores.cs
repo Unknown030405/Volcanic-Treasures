@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ScoreBoard
 {
+    // Скрипт из интернета :D
     public class DisplayHighscores : MonoBehaviour 
     {
         [SerializeField] private TMPro.TextMeshProUGUI[] rRanks;
@@ -20,7 +21,7 @@ namespace ScoreBoard
         {
             for (var i = 0; i < rNames.Length; i++)
             {
-                rRanks[i].text = i + 1 + Fields.Scoreboard.RankSeparator;
+                rRanks[i].text = i + Fields.Scoreboard.RankSeparator + Fields.Scoreboard.IndexationToNumConverter;
                 if (highscoreList.Length > i)
                 {
                     rScores[i].text = highscoreList[i].Score.ToString();
@@ -40,10 +41,11 @@ namespace ScoreBoard
         {
             for (var i = 0; i < rNames.Length; i++)
             {
-                rRanks[i].text = i + 1 + Fields.Scoreboard.RankSeparator;
+                rRanks[i].text = i + Fields.Scoreboard.RankSeparator + Fields.Scoreboard.IndexationToNumConverter;
                 rNames[i].text = Fields.Scoreboard.LoadingName;
                 rScores[i].text = Fields.Scoreboard.EmptyScore;
             }
+            
             _myScores.DownloadScores();
             yield return null;
         }

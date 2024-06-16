@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Traps
@@ -8,18 +7,13 @@ namespace Traps
         [SerializeField] private float gravityForce;
         [SerializeField] private float time;
         [SerializeField] private Rigidbody2D rb;
-        private AudioSource _audioSource;
-
-        private void Awake()
-        {
-            _audioSource = GetComponent<AudioSource>();
-        }
+        [SerializeField] private AudioSource audioSource;
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag(Fields.Tags.PlayerTag))
             {
-                _audioSource.Play();
+                audioSource.Play();
                 rb.gravityScale = gravityForce;
                 Destroy(gameObject, time);
             }

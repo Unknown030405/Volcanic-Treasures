@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Blocks/DeathScene.unity
     guid: 272ede849c8f0e449b0f98d97a8469de
+  - enabled: 1
+    path: Assets/Scenes/Blocks/LeaderBoard.unity
+    guid: 112b55e46ddf2514994d8f0363c98541
   m_configObjects: {}

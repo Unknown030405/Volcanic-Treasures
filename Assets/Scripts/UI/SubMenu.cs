@@ -28,7 +28,7 @@ namespace UI
         private void OnDeathUI(object sender, EventArgs e)
         {
             Time.timeScale = Fields.UIBehaviour.PauseTimeScale;
-            LoadSceneByName("DeathScene");
+            LoadSceneByName(Fields.DeathSceneName);
         }
     }
 }

@@ -11,9 +11,9 @@ namespace UI
         
         private void Start()
         {
-            totalCoinsText.GetComponent<CountAnimation>().SetTarget(PlayerPrefs.GetInt("Coins"));
-            totalDiamondsText.GetComponent<CountAnimation>().SetTarget( PlayerPrefs.GetInt("Diamonds"));
-            totalDistanceText.GetComponent<CountAnimation>().SetTarget(PlayerPrefs.GetInt("Distance"));
+            totalCoinsText.GetComponent<CountAnimation>().SetTarget(PlayerPrefs.GetInt(Fields.SaveSystem.PlayerCoins));
+            totalDiamondsText.GetComponent<CountAnimation>().SetTarget( PlayerPrefs.GetInt(Fields.SaveSystem.PlayerDiamonds));
+            totalDistanceText.GetComponent<CountAnimation>().SetTarget(PlayerPrefs.GetInt(Fields.SaveSystem.Distance));
         }
     }
 }

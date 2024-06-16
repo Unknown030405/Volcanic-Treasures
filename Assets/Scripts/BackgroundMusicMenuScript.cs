@@ -7,34 +7,35 @@ public class BackgroundMusicMenuScript : MonoBehaviour
 {
     private Player _player;
     private AudioSource _source;
-    void Start()
+    
+    private void Start()
     {
-        _player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        _player = GameObject.FindWithTag(Fields.Tags.PlayerTag).GetComponent<Player>();
         _source = GetComponent<AudioSource>();
         _source.volume = 0f;
-        StartCoroutine(Fade(true, _source, 2f, 1f));
-        _player.DeathEvent += Bla;
+        
+        StartCoroutine(Fade(true, _source, Fields.AudioFade.FadeInLength, Fields.AudioFade.FadeInTargetVolume));
+        _player.DeathEvent += DeathFadeOut;
     }
 
-    private void Bla(object obj, EventArgs e)
-    {
-        StartCoroutine(Fade(false, _source, 2f, 0f));
-    }
+    private void DeathFadeOut(object obj, EventArgs e) => 
+        StartCoroutine(Fade(false, _source, Fields.AudioFade.FadeOutLength, Fields.AudioFade.FadeOutTargetVolume));
     
     private void Update()
     {
         if (!_source.isPlaying)
         {
-            StartCoroutine(Fade(true, _source, 2f, 1f));
-            StartCoroutine(Fade(false, _source, 2f, 0f));
+            StartCoroutine(Fade(true, _source, Fields.AudioFade.FadeInLength, Fields.AudioFade.FadeInTargetVolume));
+            StartCoroutine(Fade(false, _source, Fields.AudioFade.FadeOutLength, Fields.AudioFade.FadeOutTargetVolume));
         }
     }
 
-    private IEnumerator Fade(bool fadeIn, AudioSource source, float duration, float targetVolume)
+    private static IEnumerator Fade(bool fadeIn, AudioSource source, float duration, float targetVolume)
     {
         if (!fadeIn)
         {
-            var lengthSource = (double)source.clip.samples / source.clip.frequency;
+            var audio = source.clip;
+            var lengthSource = (double)audio.samples / audio.frequency;
             yield return new WaitForSecondsRealtime((float)(lengthSource - duration));
         }
 

@@ -4,16 +4,9 @@ using UnityEngine;
 // Данный скрипт весит на оюъекте "Door" и позволяет производить манипуляции с нею
 public class Door : MonoBehaviour
 {
-    private Collider2D _collider2D;
-    private Animator _animator;
-    private AudioSource _audioSource;
-    
-    private void Awake()
-    { 
-        _collider2D = GetComponent<Collider2D>();
-        _animator = GetComponent<Animator>();
-        _audioSource = GetComponent<AudioSource>();
-    }
+    [SerializeField] private Collider2D col;
+    [SerializeField] private Animator animator;
+    [SerializeField] private AudioSource audioSource;
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -24,14 +17,14 @@ public class Door : MonoBehaviour
             var key = other.gameObject.GetComponent<Player>().Key;
             if (key && key.CompareTag(Fields.Tags.DoorKey))
             {
-                key.Rigidbody.velocity = new Vector2(0, 0);
-                _animator.Play(Fields.AnimationState.Door);
+                key.Rigidbody.velocity = Vector2.zero;
+                animator.Play(Fields.AnimationState.Door);
                 Destroy(key.gameObject);
-                _audioSource.Play();
+                audioSource.Play();
                 Invoke(nameof(ChangeTriggerState), Fields.DoorOpenTime);
             }
         }
     }
     
-    private void ChangeTriggerState() => _collider2D.isTrigger = true;
+    private void ChangeTriggerState() => col.isTrigger = true;
 }

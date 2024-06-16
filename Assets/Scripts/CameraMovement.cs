@@ -6,10 +6,8 @@ public class CameraMovement : MonoBehaviour
     private Vector3 _velocity = Vector3.zero;
     private Transform _playerPosition;
 
-    private void Start() 
-    {
-        _playerPosition = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-    }
+    private void Start() =>
+        _playerPosition = GameObject.FindGameObjectWithTag(Fields.Tags.PlayerTag).GetComponent<Transform>();
 
     private void Update()
     {

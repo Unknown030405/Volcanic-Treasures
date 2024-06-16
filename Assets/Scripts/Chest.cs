@@ -7,9 +7,10 @@ using Random = UnityEngine.Random;
 
 public class Chest : MonoBehaviour
 {
-    private Animator _animator;
+    [SerializeField] private Animator animator;
+    [SerializeField] private AudioSource audioSource;
+    
     private List<ILootable> _loot;
-    private AudioSource _audioSource;
 
     private void Awake()
     {
@@ -22,9 +23,6 @@ public class Chest : MonoBehaviour
             gameObject.AddComponent<Coin>(),
             gameObject.AddComponent<Diamond>()
         };
-        
-        _animator = GetComponent<Animator>();
-        _audioSource = GetComponent<AudioSource>();
     }
     
     private void OnTriggerEnter2D(Collider2D other)
@@ -36,10 +34,10 @@ public class Chest : MonoBehaviour
             var key = other.gameObject.GetComponent<Player>().Key;
             if (key && key.CompareTag(Fields.Tags.ChestKey))
             {
-                _animator.Play(Fields.AnimationState.Chest);
-                key.Rigidbody.velocity = new Vector2(0, 0);
+                animator.Play(Fields.AnimationState.Chest);
+                key.Rigidbody.velocity = Vector2.zero;
                 Destroy(key.gameObject);
-                _audioSource.Play();
+                audioSource.Play();
                 DropItem();
             }
         }

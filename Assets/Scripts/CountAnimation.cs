@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -5,38 +6,36 @@ using UnityEngine;
 [RequireComponent(typeof(TMP_Text))]
 public class CountAnimation : MonoBehaviour
 {
-    public float countDuration = 1;
-    TMP_Text numberText;
-    float currentValue = 0, targetValue = 0;
-    private Coroutine _C2T;
+    public float countDuration = Fields.CountAnimationDuration;
+    private TMP_Text _numberText;
+    private float _currentValue;
+    private float _targetValue;
+    private Coroutine _coroutine;
  
-    private void Awake()
-    {
-        numberText = GetComponent<TMP_Text>();
-    }
+    private void Awake() => _numberText = GetComponent<TMP_Text>();
  
     private void Start()
     {
-        currentValue = float.Parse(numberText.text);
-        targetValue = currentValue;
+        _currentValue = float.Parse(_numberText.text);
+        _targetValue = _currentValue;
     }
  
     private IEnumerator CountTo(float targetValue)
     {
-        var rate = Mathf.Abs(targetValue - currentValue) / countDuration;
-        while(currentValue != targetValue)
+        var rate = Mathf.Abs(targetValue - _currentValue) / countDuration;
+        while(Math.Abs(_currentValue - targetValue) > float.Epsilon)
         {
-            currentValue = Mathf.MoveTowards(currentValue, targetValue, rate * Time.deltaTime);
-            numberText.text = ((int)currentValue).ToString();
+            _currentValue = Mathf.MoveTowards(_currentValue, targetValue, rate * Time.deltaTime);
+            _numberText.text = ((int)_currentValue).ToString();
             yield return null;
         }
     }
  
     public void SetTarget(float target)
     {
-        targetValue = target;
-        if (_C2T != null)
-            StopCoroutine(_C2T);
-        _C2T = StartCoroutine(CountTo(targetValue));
+        _targetValue = target;
+        if (_coroutine != null)
+            StopCoroutine(_coroutine);
+        _coroutine = StartCoroutine(CountTo(_targetValue));
     }
 }

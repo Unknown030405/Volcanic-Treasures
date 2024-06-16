@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -11,31 +9,25 @@ namespace UI
 {
     public class UIBehaviour : MonoBehaviour
     {
-        // надо определиться с тем, как считать высоту, пройденную игроком
-        // например, зная скорость движения каждого блока вниз, с той же частотой прибавлять 1 к высоте
-        // округлять до целочисленных
         [SerializeField] private TMP_Text coinsText;
         [SerializeField] private TMP_Text diamondsText;
         [SerializeField] private TMP_Text distanceText;
         
         private Player _player;
         private Dictionary<Transform, float> _buffs;
-
-        // Start is called before the first frame update
+        
         private void Start()
         {
             _player = GameObject.FindWithTag(Fields.Tags.PlayerTag).GetComponent<Player>();
             _buffs = _player.Effects;
         }
-
-        // Update is called once per frame
+        
         private void Update()
         {
             coinsText.text = _player.Coins.ToString();
             diamondsText.text = _player.Diamonds.ToString();
             distanceText.text = _player.GetPlayerDistance().ToString();
             CheckDelay();
-            // _player.BuffEvent += StartCooldown;
         }
 
         private void CheckDelay()
@@ -44,6 +36,7 @@ namespace UI
             {
                 AddBuffToCanvas(key);
                 _buffs[key] -= Time.deltaTime;
+                
                 if (_buffs[key] < 0)
                 {
                     _buffs.Remove(key);
@@ -51,45 +44,11 @@ namespace UI
                     MoveLeft();
                     continue;
                 }
+                
                 var imageState = _buffs[key] / Fields.UIBehaviour.MaxDelay;
                 key.GetChild(1).GetComponent<Image>().fillAmount = imageState;
             }
         }
-
-        // private void StartCooldown(object sender, EventArgs e)
-        // {
-        //     var args = (UIEventArgs)e;
-        //     StartCoroutine(BuffCooldown(args.Image));
-        // }
-
-        // private IEnumerator BuffCooldown(Transform key)
-        // {
-        //     AddBuffToCanvas(key);
-        //
-        //     var image = key.GetChild(1).GetComponent<Image>();
-        //     
-        //     if (_buffs.ContainsKey(key))
-        //     {
-        //         while (_buffs[key] > 0)
-        //         {
-        //             var imageState = _buffs[key] / Fields.Buffs.UsingTime;
-        //             image.fillAmount = imageState;
-        //             _buffs[key] -= Time.deltaTime;
-        //             yield return new WaitForEndOfFrame();
-        //         }
-        //
-        //         _buffs.Remove(key);
-        //         key.gameObject.SetActive(false);
-        //         StartCoroutine(MoveLeft);
-        //     }
-        //
-        //     yield return null;
-        // }
-        
-        // private void StartCoroutine(Action methodName)
-        // {
-        //     throw new NotImplementedException();
-        // }
 
         private void AddBuffToCanvas(Transform key)
         {
@@ -114,18 +73,5 @@ namespace UI
                 shiftPosition++;
             }
         }
-        
-        // private IEnumerator SmoothedMoveLeft()
-        // {
-        //     // сдвигает список баффов влево
-        //     var shiftPosition = Fields.UIBehaviour.Shift;
-        //     foreach (var key in _buffs.Keys)
-        //     {
-        //         var pointX = shiftPosition * (Fields.UIBehaviour.Space + key.localScale.x);
-        //         key.position = new Vector3(pointX, Fields.UIBehaviour.PointY, key.position.z);
-        //         shiftPosition++;
-        //     }
-        //     yield return null;
-        // }
     }
 }

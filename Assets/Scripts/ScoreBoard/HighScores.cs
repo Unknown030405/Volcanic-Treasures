@@ -4,14 +4,14 @@ using UnityEngine.Networking;
 
 namespace ScoreBoard
 {
+    // Скрипт из интернета :D
     public class HighScores : MonoBehaviour
     {
         private PlayerScore[] _scoreList;
         private DisplayHighscores _myDisplay;
-
         public static HighScores Instance;
+        
         private delegate void RequestAnswerCallback(string message);
-        public delegate void DatabaseAnswerCallback(PlayerScore playerScore);
 
         private void Awake()
         {
@@ -46,13 +46,14 @@ namespace ScoreBoard
         public void UploadScore(string username, int score)
         {
             // form an uri without webURL
-            var uri = Fields.Scoreboard.PrivateCode + Fields.Requests.AddRequest + username + Fields.Requests.QuerySeparator + score;
+            var uri = Fields.Scoreboard.PrivateCode + Fields.Requests.AddRequest + username + 
+                      Fields.Requests.QuerySeparator + score;
             StartCoroutine(SendDatabaseRequest(uri, _ => {DownloadScores();}));
         }
     
         public void DownloadScores(int amount = 10)
         {
-            var uri = Fields.Scoreboard.PublicCode + Fields.Requests.GetFromStartRequest + amount.ToString();
+            var uri = Fields.Scoreboard.PublicCode + Fields.Requests.GetFromStartRequest + amount;
             StartCoroutine(SendDatabaseRequest(uri, DownloadCallback));
         }
         
@@ -62,16 +63,12 @@ namespace ScoreBoard
             _myDisplay.SetScoresToMenu(_scoreList);
         }
 
-        public void GetPlayerScoreByName(string username, DatabaseAnswerCallback callback) 
-        {
-            var uri = Fields.Scoreboard.PublicCode + Fields.Requests.GetByNameRequest + username;
-            StartCoroutine(SendDatabaseRequest(uri, msg => {callback(ParseEntry(msg));}));
-        }
-
-        // // Divides Scoreboard info into scoreList
+        // Divides Scoreboard info into scoreList
         private void OrganizeInfo(string rawData)
         {
-            var entries = rawData.Split(Fields.Requests.LineSeparator, System.StringSplitOptions.RemoveEmptyEntries); // get all entries
+            var entries = rawData.Split(Fields.Requests.LineSeparator, 
+                System.StringSplitOptions.RemoveEmptyEntries); // get all entries
+            
             _scoreList = new PlayerScore[entries.Length];
             for (var i = 0; i < entries.Length; i++)
                 _scoreList[i] = ParseEntry(entries[i]);
@@ -80,8 +77,8 @@ namespace ScoreBoard
         private PlayerScore ParseEntry(string dbEntry)
         {
             var entryInfo = dbEntry.Split(Fields.Requests.EntrySeparator);
-            var username = entryInfo[0];
-            var score = int.Parse(entryInfo[1]);
+            var username = entryInfo[Fields.Requests.UserNameIndex];
+            var score = int.Parse(entryInfo[Fields.Requests.ScoreIndex]);
             return new PlayerScore(username, score);
         }
     }

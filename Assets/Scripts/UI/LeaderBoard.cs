@@ -8,6 +8,7 @@ namespace UI
     {
         [SerializeField] private TMP_InputField inputField;
 
-        public void Submit() => HighScores.Instance.UploadScore(inputField.text, PlayerPrefs.GetInt("MaxDistance"));
+        public void Submit() => 
+            HighScores.Instance.UploadScore(inputField.text, PlayerPrefs.GetInt(Fields.SaveSystem.MaxDistance));
     }
 }

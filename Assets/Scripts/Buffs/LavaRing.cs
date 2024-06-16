@@ -9,6 +9,7 @@ namespace Buffs
 
         protected override void RemoveBuff() => Player.HasRingLava = false;
         
-        protected override Transform GetImage() => Canvas.transform.GetChild(0).GetChild(2);
+        protected override Transform GetTransform() => 
+            Canvas.transform.GetChild(Fields.Buffs.PanelIndex).GetChild(Fields.Buffs.LavaRingIconIndex);
     }
 }

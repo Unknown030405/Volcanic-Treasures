@@ -211,6 +211,7 @@ MonoBehaviour:
   gravityForce: 5
   time: 20
   rb: {fileID: 1116361390355801695}
+  audioSource: {fileID: 5689155967642600734}
 --- !u!82 &5689155967642600734
 AudioSource:
   m_ObjectHideFlags: 0
